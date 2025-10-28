@@ -32,7 +32,7 @@ def start_consumer():
     if not connection:
         print("❌ Could not connect to RabbitMQ after 10 attempts.")
         return
-
+    # restart on failure
     channel = connection.channel()
     channel.queue_declare(queue='orders')
 

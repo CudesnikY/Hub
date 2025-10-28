@@ -1,11 +1,13 @@
 version: "3.9"
 services:
   user_service:
+    restarts: always
     build: ./user_service
     ports:
       - "5001:5001"
 
   product_service:
+    restarts: always
     build: ./product_service
     ports:
       - "5002:5002"
@@ -13,6 +15,7 @@ services:
       - rabbitmq
 
   order_service:
+    restarts: always
     build: ./order_service
     ports:
       - "5003:5003"
