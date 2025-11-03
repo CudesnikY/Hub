@@ -23,14 +23,14 @@ def start_consumer():
         try:
             connection = pika.BlockingConnection(
                 pika.ConnectionParameters('rabbitmq'))
-            print("✅ Connected to RabbitMQ!")
+            print("Connected to RabbitMQ!")
             break
         except pika.exceptions.AMQPConnectionError:
             print(f"⏳ RabbitMQ not ready, retrying ({i+1}/10)...")
             time.sleep(5)
 
     if not connection:
-        print("❌ Could not connect to RabbitMQ after 10 attempts.")
+        print("Could not connect to RabbitMQ after 10 attempts.")
         return
     # restart on failure
     channel = connection.channel()
@@ -47,7 +47,7 @@ def start_consumer():
 
     channel.basic_consume(
         queue='orders', on_message_callback=callback, auto_ack=True)
-    print("🐇 Product-Service listening for order events...")
+    print("Product-Service listening for order events...")
     channel.start_consuming()
 
 
